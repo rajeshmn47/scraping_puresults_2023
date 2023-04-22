@@ -63,11 +63,13 @@ export default function Home() {
   }, []);
 
   const handleSubmit = async () => {
+    if(searchvalue.length>2){
     const data = await axios.get(
       `https://backendforpuand-dream11.onrender.com/getallresults/${searchvalue}`
     );
     console.log(data.data.data, "dayta");
     setResults(data.data.data);
+    }
   };
   return (
     <>
