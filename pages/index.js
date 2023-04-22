@@ -48,6 +48,7 @@ const Td = styled.td`
 
 const Table = styled.table`
   width: 100%;
+  text-align:center;
 `;
 const Result = styled.tr``;
 export default function Home() {
