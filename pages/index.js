@@ -7,6 +7,7 @@ import axios from "axios";
 import styled from "@emotion/styled";
 import Tablepu from "@/components/Tablepu";
 import { ListItemAvatar } from "@mui/material";
+import Loader from "@/components/loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +55,7 @@ const Table = styled.table`
 `;
 const Result = styled.tr``;
 export default function Home() {
+  const [loading, setLoading] = useState(false);
   const [searchvalue, setSearchValue] = useState();
   const [results, setResults] = useState([]);
   useEffect(() => {
@@ -65,7 +67,8 @@ export default function Home() {
   }, []);
 
   const handleSubmit = async () => {
-    if (searchvalue.length > 4) {
+    if (searchvalue.length > 3) {
+      setLoading(true);
       const data = await axios.get(
         `https://backendforpuand-dream11.onrender.com/getallresults/${searchvalue.toLowerCase()}`
       );
@@ -77,6 +80,7 @@ export default function Home() {
           : unique.push(x)
       );
       console.log(s, "s");
+      setLoading(false);
       setResults([...unique]);
     }
   };
@@ -126,7 +130,7 @@ export default function Home() {
         />
         <SubmitBtn onClick={() => handleSubmit()}>submit</SubmitBtn>
       </Container>
-      <Tablepu rows={results} />
+      {loading ? <Loader /> : <Tablepu rows={results} />}
     </>
   );
 }
