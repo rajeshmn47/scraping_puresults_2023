@@ -4,7 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const Container = styled.div`
   position: absolute;
   left: 47%;
-  top: 47%;
+  top: 57%;
   display: flex;
   align-items: center;
   justify-content: center;
