@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import React from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 
 const Root = styled.div``;
@@ -25,28 +25,29 @@ const Tablepu = ({ rows }) => {
   );
 
   const columns = [
-    { field: '__id', headerName: 'ID', width: 1 },
-    { field: 'name', headerName: 'name', width: 160 },
-    { field: 'regno', headerName: 'regno', width: 70 },
+    { field: "__id", headerName: "ID", width: 1 },
+    { field: "name", headerName: "name", width: 160 },
+    { field: "regno", headerName: "regno", width: 70 },
     {
-      field: 'total',
-      headerName: 'total',
-      type: 'number',
+      field: "total",
+      headerName: "total",
+      type: "number",
       width: 90,
     },
   ];
 
-  return    (<div style={{ height: 400, width: '100%' }}>
-  <DataGrid
-    rows={rows}
-    columns={columns}
-    pageSize={5}
-    rowsPerPageOptions={[5]}
-    checkboxSelection
-    getRowId ={(row) => row._id} 
-  />
-</div>
-  )
+  return (
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        getRowId={(row) => row._id}
+      />
+    </div>
+  );
 };
 
 export default Tablepu;

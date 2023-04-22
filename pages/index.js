@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import styled from "@emotion/styled";
 import Tablepu from "@/components/Tablepu";
+import { ListItemAvatar } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,7 +50,7 @@ const Td = styled.td`
 
 const Table = styled.table`
   width: 100%;
-  text-align:left;
+  text-align: left;
 `;
 const Result = styled.tr``;
 export default function Home() {
@@ -63,44 +64,49 @@ export default function Home() {
     getresults();
   }, []);
 
-
-
   const handleSubmit = async () => {
-    if(searchvalue.length>5){
-    const data = await axios.get(
-      `https://backendforpuand-dream11.onrender.com/getallresults/${searchvalue.toLowerCase()}`
-    );
-    console.log(data.data.data, "dayta");
-    setResults(data.data.data);
+    if (searchvalue.length > 5) {
+      const data = await axios.get(
+        `https://backendforpuand-dream11.onrender.com/getallresults/${searchvalue.toLowerCase()}`
+      );
+      let unique = [];
+      let akk = data.data.data;
+      let s = akk.map((x) =>
+        unique.filter((a) => a.regno == x.regno).length > 0
+          ? null
+          : unique.push(x)
+      );
+      console.log(s, "s");
+      setResults([...unique]);
     }
   };
 
-  const table=()=>{
-    return(
+  const table = () => {
+    return (
       <Results>
-      <Table>
-        <thead>
-          <tr>
-            <th>name</th>
-            <th>regno</th>
-            <th>total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.length > 0
-            ? results.map((r) => (
-                <Result>
-                  <Td>{r.name}</Td>
-                  <Td>{r.regno}</Td>
-                  <Td>{r.total}</Td>
-                </Result>
-              ))
-            : null}
-        </tbody>
-      </Table>
-    </Results>
-    )
-  }
+        <Table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>regno</th>
+              <th>total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.length > 0
+              ? results.map((r) => (
+                  <Result>
+                    <Td>{r.name}</Td>
+                    <Td>{r.regno}</Td>
+                    <Td>{r.total}</Td>
+                  </Result>
+                ))
+              : null}
+          </tbody>
+        </Table>
+      </Results>
+    );
+  };
   return (
     <>
       <Head>
@@ -120,7 +126,7 @@ export default function Home() {
         />
         <SubmitBtn onClick={() => handleSubmit()}>submit</SubmitBtn>
       </Container>
-      <Tablepu  rows={results}/>
+      <Tablepu rows={results} />
     </>
   );
 }
