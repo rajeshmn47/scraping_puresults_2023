@@ -62,7 +62,7 @@ export default function Home() {
   }, []);
 
   const handleSubmit = async () => {
-    if(searchvalue.length>2){
+    if(searchvalue.length>5){
     const data = await axios.get(
       `https://backendforpuand-dream11.onrender.com/getallresults/${searchvalue}`
     );

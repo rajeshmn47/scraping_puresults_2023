@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps, ...rest }) {
     if (!isAuthenticated) {
       router.push("/login");
     }
-  }, []);
+  }, [isAuthenticated]);
   useEffect(() => {
     console.log(user, "raveena");
   }, [user]);
