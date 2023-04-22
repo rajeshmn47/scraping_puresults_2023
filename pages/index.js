@@ -89,20 +89,24 @@ export default function Home() {
       </Container>
       <Results>
         <Table>
-          <tr>
-            <th>name</th>
-            <th>regno</th>
-            <th>total</th>
-          </tr>
-          {results.length > 0
-            ? results.map((r) => (
-                <Result>
-                  <Td>{r.name}</Td>
-                  <Td>{r.regno}</Td>
-                  <Td>{r.total}</Td>
-                </Result>
-              ))
-            : null}
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>regno</th>
+              <th>total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.length > 0
+              ? results.map((r) => (
+                  <Result>
+                    <Td>{r.name}</Td>
+                    <Td>{r.regno}</Td>
+                    <Td>{r.total}</Td>
+                  </Result>
+                ))
+              : null}
+          </tbody>
         </Table>
       </Results>
     </>
