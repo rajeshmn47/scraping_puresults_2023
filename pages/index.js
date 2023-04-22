@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import styled from "@emotion/styled";
+import Tablepu from "@/components/Tablepu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,6 +63,8 @@ export default function Home() {
     getresults();
   }, []);
 
+
+
   const handleSubmit = async () => {
     if(searchvalue.length>5){
     const data = await axios.get(
@@ -71,6 +74,33 @@ export default function Home() {
     setResults(data.data.data);
     }
   };
+
+  const table=()=>{
+    return(
+      <Results>
+      <Table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>regno</th>
+            <th>total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {results.length > 0
+            ? results.map((r) => (
+                <Result>
+                  <Td>{r.name}</Td>
+                  <Td>{r.regno}</Td>
+                  <Td>{r.total}</Td>
+                </Result>
+              ))
+            : null}
+        </tbody>
+      </Table>
+    </Results>
+    )
+  }
   return (
     <>
       <Head>
@@ -90,28 +120,7 @@ export default function Home() {
         />
         <SubmitBtn onClick={() => handleSubmit()}>submit</SubmitBtn>
       </Container>
-      <Results>
-        <Table>
-          <thead>
-            <tr>
-              <th>name</th>
-              <th>regno</th>
-              <th>total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.length > 0
-              ? results.map((r) => (
-                  <Result>
-                    <Td>{r.name}</Td>
-                    <Td>{r.regno}</Td>
-                    <Td>{r.total}</Td>
-                  </Result>
-                ))
-              : null}
-          </tbody>
-        </Table>
-      </Results>
+      <Tablepu  rows={results}/>
     </>
   );
 }
