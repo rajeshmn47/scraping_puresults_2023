@@ -25,7 +25,7 @@ const Tablepu = ({ rows }) => {
   );
 
   const columns = [
-    { field: "__id", headerName: "ID", width: 1 },
+    { field: "_id", headerName: "ID", width: 1 },
     { field: "name", headerName: "name", width: 160 },
     { field: "regno", headerName: "regno", width: 70 },
     {
@@ -43,7 +43,6 @@ const Tablepu = ({ rows }) => {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>
